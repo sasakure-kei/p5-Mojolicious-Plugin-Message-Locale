@@ -7,31 +7,31 @@ our $VERSION = '0.01';
 sub register {
     my ($self, $app, $conf) = @_;
 
-    my $default_msg = exists $conf->{default_message} ? $conf->{default_message} : '';
-    my $locale = exists $conf->{locale} ? $conf->{locale} : 'en';
-    my $locale_file = exists $conf->{file} ? $conf->{file} : 'locale.conf';
+    $conf->{default_message} ||= '';
+    $conf->{locale}          ||= 'en';
+    $conf->{file}            ||= 'locale.conf';
 
-    my $messages = $app->plugin('Config', { file => $locale_file } );
+    my $messages = $app->plugin('Config', { file => $conf->{file} } );
 
     $app->helper ( set_locale => sub {
         my ($c, $loc,) = @_;
-	$locale = $loc ? $loc : 'en';
+	$conf->{locale} = $loc ? $loc : 'en';
     });
 
     $app->helper ( locale => sub {
         my ($c, $key, $group,) = @_;
 	unless ( $key ) {
 	    warn 'key is undefined or incorrenct.';
-            return $default_msg;
+            return $conf->{default_message};
         }
 	$group ||= 'common';
 
-        if ( exists $messages->{$group}->{$key}->{$locale} ) {
-            $messages->{$group}->{$key}->{$locale};
-	} elsif ( exists $messages->{'common'}->{$key}->{$locale} ) {
-	    $messages->{'common'}->{$key}->{$locale}
+        if ( exists $messages->{$group}->{$key}->{$conf->{locale}} ) {
+            $messages->{$group}->{$key}->{$conf->{locale}};
+	} elsif ( exists $messages->{'common'}->{$key}->{$conf->{locale}} ) {
+	    $messages->{'common'}->{$key}->{$conf->{locale}}
 	} else {
-	    $default_msg;
+	    $conf->{default_message};
         }
     });
 }
@@ -58,7 +58,7 @@ Mojolicious::Plugin::Message::Locale - Mojolicious Plugin
 
   # Mojolicious
   $self->plugin('Message::Locale', {
-      default_str => '',
+      default_message => '',
       locale => 'en',
       file => 'locale.conf',
   });
@@ -106,7 +106,7 @@ Kei Shimada C<< <sasakure_kei __at__ cpan.org> >>
 
 =head1 REPOSITORY
 
-  git clone git://github.com/(sasakure)
+  git clone git@github.com:sasakure-kei/p5-Mojolicious-Plugin-Message-Locale.git
 
 =head1 LICENCE AND COPYRIGHT
 
