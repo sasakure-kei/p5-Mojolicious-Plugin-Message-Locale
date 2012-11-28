@@ -1,8 +1,7 @@
 package Mojolicious::Plugin::Message::Locale;
 use Mojo::Base 'Mojolicious::Plugin';
-use utf8;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub register {
     my ($self, $app, $conf) = @_;
@@ -38,6 +37,8 @@ sub register {
 
 1;
 __END__
+
+=encoding utf8
 
 =head1 NAME
 
@@ -98,7 +99,7 @@ Register plugin in L<Mojolicious> application.
 
 =head1 SEE ALSO
 
-L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicio.us>.
+L<Mojolicious>, L<Mojolicious::Guides>, L<http://mojolicious>.
 
 =head1 AUTHOR
 
@@ -110,8 +111,8 @@ Kei Shimada C<< <sasakure_kei __at__ cpan.org> >>
 
 =head1 LICENCE AND COPYRIGHT
 
-Copyright (c) 2012, Kei Shimada C<< <sasakure_kei _    _at__ cpan.org> >>. All rights reserved.
-This module is free software; you can redistribute     it and/or
-modify it under the same terms as Perl itself. See     L<perlartistic>.
+Copyright (c) 2012, Kei Shimada C<< <sasakure_kei __at__ cpan.org> >>. All rights reserved.
+This module is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself. See L<perlartistic>.
 
 =cut
