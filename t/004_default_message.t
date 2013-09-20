@@ -9,11 +9,11 @@ plugin 'Message::Locale', default_message => '-----';
 
 get '/message_from_empty' => sub {
   my $self = shift;
-  $self->render_text( $self->locale() );
+  $self->render( text => $self->locale() );
 };
 get '/message_from_sasakure' => sub {
   my $self = shift;
-  $self->render_text( $self->locale('sasakure', 'common') );
+  $self->render( text => $self->locale('sasakure', 'common') );
 };
 
 my $t = Test::Mojo->new;

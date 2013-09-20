@@ -10,11 +10,11 @@ plugin 'Message::Locale', file => 'other_locale.conf';
 
 get '/message_from_common' => sub {
   my $self = shift;
-  $self->render_text( $self->locale('message', 'common') );
+  $self->render( text => $self->locale('message', 'common') );
 };
 get '/message_from_original' => sub {
   my $self = shift;
-  $self->render_text( $self->locale('message', 'original') );
+  $self->render( text => $self->locale('message', 'original') );
 };
 
 my $t = Test::Mojo->new;
