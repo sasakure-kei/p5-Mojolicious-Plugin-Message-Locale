@@ -9,16 +9,16 @@ plugin 'Message::Locale';
 
 get '/message_from_common' => sub {
   my $self = shift;
-  $self->render_text( $self->locale('message', 'common') );
+  $self->render( text => $self->locale('message', 'common') );
 };
 get '/message_from_original' => sub {
   my $self = shift;
-  $self->render_text( $self->locale('message', 'original') );
+  $self->render( text => $self->locale('message', 'original') );
 };
 get '/set_locale_method' => sub {
   my $self = shift;
   $self->set_locale('ja');
-  $self->render_text( $self->locale('message', 'common') );
+  $self->render( text => $self->locale('message', 'common') );
 };
 
 my $t = Test::Mojo->new;
